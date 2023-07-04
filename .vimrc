@@ -14,7 +14,6 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-commentary'
 Plug 'ryanoasis/vim-devicons'
 Plug 'itchyny/lightline.vim'
-Plug 'mengelbrecht/lightline-bufferline'
 Plug 'preservim/nerdtree'
 Plug 'airblade/vim-gitgutter'
 
@@ -51,21 +50,7 @@ let g:lightline = {
   \   'left': [ [ 'mode' ] ],
   \   'right': [ [ 'lineinfo' ] ]
   \ },
-  \ 'tabline': {
-  \   'left': [ [ 'buffers' ] ],                      \   'right': [ [ 'close' ] ]
-  \ },
-  \ 'component_expand': {
-  \   'buffers': 'lightline#bufferline#buffers'
-  \ },
-  \ 'component_type': {
-  \   'buffers': 'tabsel'
-  \ },
   \ }
-
-let g:lightline#bufferline#shorten_path = 1
-let g:lightline#bufferline#filename_modifier = ':t'
-let g:lightline.component_raw = {'buffers': 1}
-let g:lightline#bufferline#clickable = 1
 
 let g:NERDTreeWinSize = 25
 
