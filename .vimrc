@@ -1,3 +1,9 @@
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 call plug#begin()
 
 Plug 'ctrlpvim/ctrlp.vim'
@@ -6,7 +12,11 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'mattn/emmet-vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-commentary'
+Plug 'ryanoasis/vim-devicons'
 Plug 'itchyny/lightline.vim'
+Plug 'mengelbrecht/lightline-bufferline'
+Plug 'preservim/nerdtree'
+Plug 'airblade/vim-gitgutter'
 
 call plug#end()
 
@@ -37,7 +47,27 @@ let g:lightline = {
   \             [ 'filename', 'readonly', 'filetype' ] ],
   \   'right': [ [ 'lineinfo', 'modified' ] ]
   \ },
+  \ 'inactive': {
+  \   'left': [ [ 'mode' ] ],
+  \   'right': [ [ 'lineinfo' ] ]
+  \ },
+  \ 'tabline': {
+  \   'left': [ [ 'buffers' ] ],                      \   'right': [ [ 'close' ] ]
+  \ },
+  \ 'component_expand': {
+  \   'buffers': 'lightline#bufferline#buffers'
+  \ },
+  \ 'component_type': {
+  \   'buffers': 'tabsel'
+  \ },
   \ }
+
+let g:lightline#bufferline#shorten_path = 1
+let g:lightline#bufferline#filename_modifier = ':t'
+let g:lightline.component_raw = {'buffers': 1}
+let g:lightline#bufferline#clickable = 1
+
+let g:NERDTreeWinSize = 25
 
 let g:mapleader = " "
 nnoremap <leader>t :term<CR>
@@ -65,3 +95,6 @@ endif
 nmap <silent> <leader>re <Plug>(coc-codeaction-refactor)
 xmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
 nmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
+nnoremap <C-f>m :NERDTreeToggle<CR>                 
+nnoremap <C-o> :w!<CR>
+nnoremap <C-x> :q!<CR>
